@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Russia Mesto</title>
+</head>
+
+<body>
+    <div class="page">
+
+        <header class="header">
+            <img src="./images/Vector.svg" alt="Логотип" class="header__logo">
+        </header>
+
+        <main class="content">
+            <section class="profile">
+                <div class="profile__header">
+                    <div class="profile__avatar-container">
+                        <img src="./images/avatar.jpg" alt="Аватарка" class="profile__avatar">
+                    </div>
+                    <div class="profile__info">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button type="button" class="profile__edit-button"></button>
+                    </div>
+                    <p class="profile__about">Исследователь океана</p>
+                </div>
+                <button type="button" class="profile__add-button"></button>
+            </section>
+            <section class="elements">
+                <article class="element">
+                    <div class="element__item">
+                        <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="element__image">
+                        <div class="element__description">
+                            <h3 class="element__title">Карачаевск</h3>
+                            <button type="button" class="element__like-btn"></button>
+                        </div>
+                    </div>
+                </article>
+                <article class="element">
+                    <div class="element__item">
+                        <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="element__image">
+                        <div class="element__description">
+                            <h3 class="element__title">Карачаевск</h3>
+                            <button type="button" class="element__like-btn"></button>
+                        </div>
+                    </div>
+                </article>
+                <article class="element">
+                    <div class="element__item">
+                        <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="element__image">
+                        <div class="element__description">
+                            <h3 class="element__title">Карачаевск</h3>
+                            <button type="button" class="element__like-btn"></button>
+                        </div>
+                    </div>
+                </article>
+                <article class="element">
+                    <div class="element__item">
+                        <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="element__image">
+                        <div class="element__description">
+                            <h3 class="element__title">Карачаевск</h3>
+                            <button type="button" class="element__like-btn"></button>
+                        </div>
+                    </div>
+                </article>
+                <article class="element">
+                    <div class="element__item">
+                        <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="element__image">
+                        <div class="element__description">
+                            <h3 class="element__title">Карачаевск</h3>
+                            <button type="button" class="element__like-btn"></button>
+                        </div>
+                    </div>
+                </article>
+                <article class="element">
+                    <div class="element__item">
+                        <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="element__image">
+                        <div class="element__description">
+                            <h3 class="element__title">Карачаевск</h3>
+                            <button type="button" class="element__like-btn"></button>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2023 Ivan Shlyakov</p>
+        </footer>
+
+        <div class="popup">
+            <div class="popup__container">
+                <button type="button" class="popup__btn-close"></button>
+                <form class="popup__form">
+                    <h3 class="popup__title">Редактировать профиль</h3>
+                    <input class="popup__input popup__input_name" type="text" name="user-name" required>
+                    <input class="popup__input popup__input_about" type="text" name="user-about" required>
+                    <button type="submit" class="popup__btn-save">Сохранить</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <script src="./pages/index.js"></script>
+</body>
+
+</html>
