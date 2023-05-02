@@ -9,10 +9,19 @@
     text-align: center;
     cursor: pointer;
     padding: 0;
+    border: none;
+    border: 2px solid #FFFFFF;
+    border-radius: 2px;
+}
+
+.popup__btn-save:hover {
+    background-color: rgba(0, 0, 0, .8);
 }
 
 @media screen and (max-width: 480px) {
     .popup__btn-save {
+        font-size: 14px;
+        line-height: 17px;
         width: 238px;
         height: 46px;
         margin: 45px 22px 25px;

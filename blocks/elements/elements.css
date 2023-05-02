@@ -6,10 +6,17 @@
     max-width: 880px;
     justify-content: space-between;
     padding-top: 51px;
+    column-gap: 17px;
 }
 
 @media screen and (max-width: 960px) {
     .elements {
         justify-content: space-around;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .elements {
+        padding-top: 0;
     }
 }
