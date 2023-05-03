@@ -9,7 +9,6 @@
     white-space: nowrap;
     font-style: normal;
     max-width: 336px;
-    height: 18px;
 }
 
 @media screen and (max-width: 750px) {
@@ -17,6 +16,5 @@
         max-width: 282px;
         font-size: 14px;
         line-height: 17px;
-        height: 14px;
     }
 }

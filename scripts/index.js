@@ -7,13 +7,13 @@ const userAboutInput = document.querySelector('.popup__input_type_about');
 
 
 function openPopup() {
-  popup.classList.add('popup__opened');
+  popup.classList.add('popup_opened');
   userNameInput.value = profileName.textContent;
   userAboutInput.value = profileAbout.textContent;
 }
 
 function closePopup() {
-  popup.classList.remove('popup__opened');
+  popup.classList.remove('popup_opened');
 }
 
 popupToggleBtn.addEventListener('click', openPopup);
