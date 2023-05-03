@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(min-content, max-content));
     align-items: center;
-    padding-top: 40px;
     column-gap: 30px;
     row-gap: 16px;
 }

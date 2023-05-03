@@ -10,7 +10,7 @@
     background-position: center;
     background-repeat: no-repeat;
     padding: 0;
-    align-self: center;
+    align-items: center;
 }
 
 .profile__add-button:hover {
