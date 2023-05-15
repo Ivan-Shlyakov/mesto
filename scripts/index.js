@@ -4,10 +4,10 @@ const popupCloseBtn = document.querySelector('.popup__btn-close');
 const popupForm = document.querySelector('.popup__form');
 const userNameInput = document.querySelector('.popup__input_type_name');
 const userAboutInput = document.querySelector('.popup__input_type_about');
-const popupEdit = document.querySelector('.popup__edit');
+const popupEdit = document.querySelector('.popup-edit');
 const profileAdd = document.querySelector('.profile__add-button');
-const popupAdd = document.querySelector('.popup__add');
-const popupImage = document.querySelector('.popup__image');
+const popupAdd = document.querySelector('.popup-add');
+const popupImage = document.querySelector('.popup-image');
 
 
 function openPopup(popupElement) {
@@ -66,12 +66,12 @@ elementsContainer.addEventListener('click', (event) => {
   }
 });
 
-const popupAddCloseBtn = document.querySelector('.popup__add .popup__btn-close');
+const popupAddCloseBtn = document.querySelector('.popup-add .popup__btn-close');
 popupAddCloseBtn.addEventListener('click', () => {
   closePopup(popupAdd);
 });
 
-const popupImageCloseBtn = document.querySelector('.popup__image .popup__btn-close');
+const popupImageCloseBtn = document.querySelector('.popup-image .popup__btn-close');
 popupImageCloseBtn.addEventListener('click', () => {
   closePopup(popupImage);
 });
@@ -163,5 +163,5 @@ function handleAddFormSubmit(evt) {
   closePopup(popupAdd);
 }
 
-const popupAddForm = document.querySelector('.popup__add .popup__form');
+const popupAddForm = document.querySelector('.popup-add .popup__form');
 popupAddForm.addEventListener('submit', handleAddFormSubmit);
