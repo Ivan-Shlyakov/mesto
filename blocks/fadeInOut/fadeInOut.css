@@ -1,0 +1,21 @@
+@keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+.popup__container {
+    animation: fadeInOut 0.3s;
+}
+  
+.popup__btn-close {
+    animation: fadeInOut 0.3s;
+}
+  
+.popup__form,
+.popup__img-container {
+    animation: fadeInOut 0.3s;
+}
