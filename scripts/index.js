@@ -12,6 +12,9 @@ const placeInput = document.querySelector('.popup__input_type_place');
 const urlInput = document.querySelector('.popup__input_type_url');
 const popupImageElement = popupImage.querySelector('.popup__img');
 const popupCaptionElement = popupImage.querySelector('.popup__img-caption');
+const inputs = document.querySelectorAll('.popup__input');
+const saveButton = document.querySelector('.popup__btn-save');
+const addButton = document.querySelector('.popup__btn-add');
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
@@ -36,6 +39,32 @@ popupCloseBtn.addEventListener('click', () => {
   closePopup(popupEdit);
   closePopup(popupAdd);
   closePopup(popupImage);
+});
+
+const popupCloseBtns = document.querySelectorAll('.popup__btn-close');
+const popups = document.querySelectorAll('.popup');
+
+popupCloseBtns.forEach((closeBtn) => {
+  closeBtn.addEventListener('click', () => {
+    const popup = closeBtn.closest('.popup');
+    closePopup(popup);
+  });
+});
+
+popups.forEach((popup) => {
+  popup.addEventListener('click', (event) => {
+    if (event.target === popup) {
+      closePopup(popup);
+    }
+  });
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closePopup(popupEdit);
+    closePopup(popupAdd);
+    closePopup(popupImage);
+  }
 });
 
 const profileName = document.querySelector('.profile__name');
@@ -72,15 +101,6 @@ elementsContainer.addEventListener('click', (event) => {
   }
 });
 
-const popupAddCloseBtn = document.querySelector('.popup-add .popup__btn-close');
-popupAddCloseBtn.addEventListener('click', () => {
-  closePopup(popupAdd);
-});
-
-const popupImageCloseBtn = document.querySelector('.popup-image .popup__btn-close');
-popupImageCloseBtn.addEventListener('click', () => {
-  closePopup(popupImage);
-});
 
 const initialCards = [
   {
@@ -164,3 +184,66 @@ function handleAddFormSubmit(evt) {
 
 const popupAddForm = document.querySelector('.popup-add .popup__form');
 popupAddForm.addEventListener('submit', handleAddFormSubmit);
+
+
+function validateFields() {
+  const nameInput = document.querySelector('.popup__input_type_name');
+  const aboutInput = document.querySelector('.popup__input_type_about');
+  const titleInput = document.querySelector('.popup__input_type_place');
+  const urlInput = document.querySelector('.popup__input_type_url');
+  const urlError = document.querySelector('#url-error');
+  const nameError = document.querySelector('#name-error');
+  const aboutError = document.querySelector('#about-error');
+  const titleError = document.querySelector('#title-error');
+
+  // Проверка поля "Имя"
+  if (nameInput.validity.valueMissing) {
+    nameError.textContent = 'Вы пропустили это поле.';
+  } else if (nameInput.validity.tooShort || nameInput.validity.tooLong) {
+    nameError.textContent = 'Имя должно содержать от 2 до 40 символов';
+  } else {
+    nameError.textContent = '';
+  }
+
+  // Проверка поля "О себе"
+  if (aboutInput.validity.valueMissing) {
+    aboutError.textContent = 'Вы пропустили это поле.';
+  } else if (aboutInput.validity.tooShort || aboutInput.validity.tooLong) {
+    aboutError.textContent = 'Описание должно содержать от 2 до 200 символов';
+  } else {
+    aboutError.textContent = '';
+  }
+
+  // Проверка поля "Название"
+  if (titleInput.validity.valueMissing) {
+    titleError.textContent = titleInput.validationMessage;
+  } else if (titleInput.validity.tooShort || titleInput.validity.tooLong) {
+    titleError.textContent = titleInput.validationMessage;
+  } else {
+    titleError.textContent = '';
+  }
+
+  // Валидация ссылки на картинку
+  if (urlInput.validity.valueMissing) {
+    urlError.textContent = urlInput.validationMessage;
+  } else if (urlInput.validity.typeMismatch) {
+    urlError.textContent = 'Введите корректный URL';
+  } else {
+    urlError.textContent = '';
+  }
+
+  // Активация/деактивация кнопки "Сохранить и Создать"
+  saveButton.disabled = !nameInput.validity.valid || !aboutInput.validity.valid;
+
+  addButton.disabled = !titleInput.validity.valid || !urlInput.validity.valid;
+}
+
+
+inputs.forEach(input => {
+  input.addEventListener('input', validateFields);
+});
+
+popupForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+});
+

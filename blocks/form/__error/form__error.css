@@ -1,0 +1,17 @@
+.form__error {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+    margin-top: 5px;
+    margin-left: 36px;
+}
+
+@media screen and (max-width: 480px) {
+    .form__error {
+        margin-left: 25px;
+        margin-right: 20px;
+    }
+}

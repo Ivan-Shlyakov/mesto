@@ -1,4 +1,4 @@
-.popup__btn-save {
+.popup__btn-add {
     width: 358px;
     height: 50px;
     color: white;
@@ -13,16 +13,16 @@
     border-radius: 2px;
 }
 
-.popup__btn-save:hover {
+.popup__btn-add:hover {
     background-color: rgba(0, 0, 0, .8);
 }
 
-.popup__btn-save:disabled {
+.popup__btn-add:disabled {
     opacity: 0.2;
 }
 
 @media screen and (max-width: 480px) {
-    .popup__btn-save {
+    .popup__btn-add {
         font-size: 14px;
         line-height: 17px;
         width: 238px;
