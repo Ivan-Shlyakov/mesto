@@ -15,12 +15,24 @@ const popupCaptionElement = popupImage.querySelector('.popup__img-caption');
 const inputs = document.querySelectorAll('.popup__input');
 const saveButton = document.querySelector('.popup__btn-save');
 const addButton = document.querySelector('.popup__btn-add');
+let currentPopup = null;
 
 function openPopup(popupElement) {
+  currentPopup = popupElement;
   popupElement.classList.add('popup_opened');
+
+  if (popupElement === popupAdd) {
+    const addButton = popupAdd.querySelector('.popup__btn-add');
+    addButton.classList.add('popup__btn-add_disabled');
+    addButton.setAttribute('disabled', 'disabled');
+  }
 }
 
 function closePopup(popupElement) {
+  if (popupElement === currentPopup) {
+    currentPopup = null;
+  }
+
   popupElement.classList.remove('popup_opened');
 }
 
@@ -77,27 +89,26 @@ function handleFormSubmit (evt) {
     profileAbout.textContent = userAboutInput.value;
 
     closePopup(popupEdit);
+    if (currentPopup !== null) {
+      closePopup(currentPopup);
+    }
 }
 
 popupForm.addEventListener('submit', handleFormSubmit);
 
 const elementsContainer = document.querySelector('.elements');
 
-function handleCardClick(event) {
-  const cardImage = event.target;
-  const imageSrc = cardImage.getAttribute('src');
-  const imageAlt = cardImage.getAttribute('alt');
-  
-  popupImageElement.setAttribute('src', imageSrc);
-  popupImage.setAttribute('alt', imageAlt);
-
-  popupCaptionElement.textContent = cardImage.parentElement.querySelector('.element__title').textContent;
-  openPopup(popupImage);
-}
-
 elementsContainer.addEventListener('click', (event) => {
   if (event.target.classList.contains('element__image')) {
-    handleCardClick(event);
+    const cardImage = event.target;
+    const imageSrc = cardImage.getAttribute('src');
+    const imageAlt = cardImage.getAttribute('alt');
+  
+    popupImageElement.setAttribute('src', imageSrc);
+    popupImage.setAttribute('alt', imageAlt);
+
+    popupCaptionElement.textContent = cardImage.parentElement.querySelector('.element__title').textContent;
+    openPopup(popupImage);
   }
 });
 
@@ -180,70 +191,10 @@ function handleAddFormSubmit(evt) {
   form.reset();
 
   closePopup(popupAdd);
+  if (currentPopup !== null) {
+    closePopup(currentPopup);
+  }
 }
 
 const popupAddForm = document.querySelector('.popup-add .popup__form');
 popupAddForm.addEventListener('submit', handleAddFormSubmit);
-
-
-function validateFields() {
-  const nameInput = document.querySelector('.popup__input_type_name');
-  const aboutInput = document.querySelector('.popup__input_type_about');
-  const titleInput = document.querySelector('.popup__input_type_place');
-  const urlInput = document.querySelector('.popup__input_type_url');
-  const urlError = document.querySelector('#url-error');
-  const nameError = document.querySelector('#name-error');
-  const aboutError = document.querySelector('#about-error');
-  const titleError = document.querySelector('#title-error');
-
-  // Проверка поля "Имя"
-  if (nameInput.validity.valueMissing) {
-    nameError.textContent = 'Вы пропустили это поле.';
-  } else if (nameInput.validity.tooShort || nameInput.validity.tooLong) {
-    nameError.textContent = 'Имя должно содержать от 2 до 40 символов';
-  } else {
-    nameError.textContent = '';
-  }
-
-  // Проверка поля "О себе"
-  if (aboutInput.validity.valueMissing) {
-    aboutError.textContent = 'Вы пропустили это поле.';
-  } else if (aboutInput.validity.tooShort || aboutInput.validity.tooLong) {
-    aboutError.textContent = 'Описание должно содержать от 2 до 200 символов';
-  } else {
-    aboutError.textContent = '';
-  }
-
-  // Проверка поля "Название"
-  if (titleInput.validity.valueMissing) {
-    titleError.textContent = titleInput.validationMessage;
-  } else if (titleInput.validity.tooShort || titleInput.validity.tooLong) {
-    titleError.textContent = titleInput.validationMessage;
-  } else {
-    titleError.textContent = '';
-  }
-
-  // Валидация ссылки на картинку
-  if (urlInput.validity.valueMissing) {
-    urlError.textContent = urlInput.validationMessage;
-  } else if (urlInput.validity.typeMismatch) {
-    urlError.textContent = 'Введите корректный URL';
-  } else {
-    urlError.textContent = '';
-  }
-
-  // Активация/деактивация кнопки "Сохранить и Создать"
-  saveButton.disabled = !nameInput.validity.valid || !aboutInput.validity.valid;
-
-  addButton.disabled = !titleInput.validity.valid || !urlInput.validity.valid;
-}
-
-
-inputs.forEach(input => {
-  input.addEventListener('input', validateFields);
-});
-
-popupForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-});
-
