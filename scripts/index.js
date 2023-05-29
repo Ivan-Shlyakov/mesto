@@ -46,13 +46,6 @@ profileAdd.addEventListener('click', () => {
   openPopup(popupAdd);
 });
 
-
-popupCloseBtn.addEventListener('click', () => {
-  closePopup(popupEdit);
-  closePopup(popupAdd);
-  closePopup(popupImage);
-});
-
 const popupCloseBtns = document.querySelectorAll('.popup__btn-close');
 const popups = document.querySelectorAll('.popup');
 
