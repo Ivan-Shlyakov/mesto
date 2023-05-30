@@ -43,9 +43,9 @@
                 <button type="button" class="popup__btn-close"></button>
                 <form class="popup__form" name="profile-form">
                     <h3 class="popup__title">Редактировать профиль</h3>
-                    <input class="popup__input popup__input_type_name" type="text" name="user-name" placeholder="Имя" required minlength="2" maxlength="40">
+                    <input class="popup__input popup__input_type_name" type="text" id="user-name" name="user-name" placeholder="Имя" required minlength="2" maxlength="40">
                     <span class="popup__form-error" id="name-error"></span>
-                    <input class="popup__input popup__input_type_about" type="text" name="user-about" placeholder="О себе" required minlength="2" maxlength="200">
+                    <input class="popup__input popup__input_type_about" type="text" id="user-about" name="user-about" placeholder="О себе" required minlength="2" maxlength="200">
                     <span class="popup__form-error" id="about-error"></span>
                     <button type="submit" class="popup__btn-save">Сохранить</button>
                 </form>
@@ -60,7 +60,7 @@
                     <span class="popup__form-error" id="title-error"></span>
                     <input class="popup__input popup__input_type_url" type="url" name="url" placeholder="Ссылка на картинку" required>
                     <span class="popup__form-error" id="url-error"></span>
-                    <button type="submit" class="popup__btn-add">Создать</button>
+                    <button type="submit" class="popup__btn-add" disabled>Создать</button>
                 </form>
             </div>
         </div>
