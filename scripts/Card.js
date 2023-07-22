@@ -1,11 +1,12 @@
 export class Card {
-    constructor(name, link) {
-        this.name = name;
-        this.link = link;
+    constructor(name, link, templateSelector) {
+        this._name = name;
+        this._link = link;
+        this._templateSelector = templateSelector;
     }
 
     _getTemplate() {
-        const cardTemplate = document.getElementById('card-template');
+        const cardTemplate = document.querySelector(this._templateSelector);
         const card = cardTemplate.content.cloneNode(true);
         return card;
     }
@@ -35,9 +36,9 @@ export class Card {
     _openImagePopup() {
         const popupImageElement = document.querySelector('.popup-image .popup__img');
         const popupCaptionElement = document.querySelector('.popup-image .popup__img-caption');
-        popupImageElement.setAttribute('src', this.link);
-        popupImageElement.setAttribute('alt', this.name);
-        popupCaptionElement.textContent = this.name;
+        popupImageElement.setAttribute('src', this._link);
+        popupImageElement.setAttribute('alt', this._name);
+        popupCaptionElement.textContent = this._name;
         openPopup(popupImage);
     }
 
@@ -46,9 +47,9 @@ export class Card {
         const image = cardElement.querySelector('.element__image');
         const title = cardElement.querySelector('.element__title');
 
-        image.src = this.link;
-        image.alt = this.name;
-        title.textContent = this.name;
+        image.src = this._link;
+        image.alt = this._name;
+        title.textContent = this._name;
 
         this._setEventListeners(cardElement);
 
@@ -56,3 +57,6 @@ export class Card {
     }
 }
 
+export {
+    Card
+};
