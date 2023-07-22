@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const popups = document.querySelectorAll('.popup');
 
   const popupForm = profilePopup.querySelector('.popup__form');
+  const userNameInput = profilePopup.querySelector('.popup__input_type_name');
+  const userAboutInput = profilePopup.querySelector('.popup__input_type_about');
   const placeInput = addPopup.querySelector('.popup__input_type_place');
   const urlInput = addPopup.querySelector('.popup__input_type_url');
 
@@ -101,8 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
       closePopup(currentPopup);
     }
 
-    addButton.classList.add('popup__btn-add_disabled');
-    addButton.setAttribute('disabled', 'disabled');
+    profileAddButton.classList.add('popup__btn-add_disabled');
+    profileAddButton.setAttribute('disabled', 'disabled');
   }
 
   profileEditButton.addEventListener('click', () => {
@@ -141,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const imageAlt = cardImage.getAttribute('alt');
 
       popupImageElement.setAttribute('src', imageSrc);
-      popupImage.setAttribute('alt', imageAlt);
+      popupImageElement.setAttribute('alt', imageAlt);
 
       popupCaptionElement.textContent = cardImage.parentElement.querySelector('.element__title').textContent;
       openPopup(imagePopup);
