@@ -6,7 +6,6 @@ export class FormValidator {
       this._inputErrorClass = settings.inputErrorClass;
       this._errorClass = settings.errorClass;
   
-      // Найдем кнопку submit для данной формы
       this._submitButton = formElement.querySelector(this._submitButtonSelector);
     }
   
@@ -68,12 +67,12 @@ export class FormValidator {
       });
       this._setEventListeners();
   
-      // Проверяем, нужно ли активировать кнопку submit при инициализации формы
+      
       if (this._submitButton) {
-        this._submitButton.disabled = true; // Устанавливаем кнопку в неактивное состояние при инициализации
+        this._submitButton.disabled = true; 
       }
     }
-    
+
     resetValidation() {
         const inputs = Array.from(this._formElement.querySelectorAll(this._inputSelector));
         inputs.forEach(input => {

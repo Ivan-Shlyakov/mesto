@@ -83,8 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const name = nameInput.value;
       const link = linkInput.value;
   
-      const newCard = createCard(name, link); // Изменил эту строку
-      elementsContainer.appendChild(newCard); // Изменил эту строку
+      const newCard = createCard(name, link); 
+      elementsContainer.appendChild(newCard); 
   
       form.reset();
       closePopup(addPopup);
@@ -189,7 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
     inputErrorClass: 'popup__input_type_error',
   };
 
-  // Создайте два отдельных экземпляра FormValidator для каждой формы
   const formValidatorEdit = new FormValidator(formValidatorSettingsEdit, popupForm);
   formValidatorEdit.enableValidation();
 
