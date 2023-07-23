@@ -1,7 +1,11 @@
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const profilePopup = document.querySelector('.popup-edit');
   const addPopup = document.querySelector('.popup-add');
   const imagePopup = document.querySelector('.popup-image');
+  const elementsContainer = document.querySelector('.elements');
 
   const profileEditButton = document.querySelector('.profile__edit-button');
   const profileAddButton = document.querySelector('.profile__add-button');
@@ -25,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function openPopup(popupElement) {
     currentPopup = popupElement;
     popupElement.classList.add('popup_opened');
-
     document.addEventListener('keydown', closeByEscape);
   }
 
@@ -60,27 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function createCard(name, link) {
-    const cardTemplate = document.getElementById('card-template');
-    const card = cardTemplate.content.cloneNode(true);
-    const cardElement = card.querySelector('.element');
-    const image = card.querySelector('.element__image');
-    const title = card.querySelector('.element__title');
-    const likeBtn = card.querySelector('.element__like-btn');
-    const deleteBtn = card.querySelector('.element__delete-btn');
-
-    image.src = link;
-    image.alt = name;
-    title.textContent = name;
-
-    likeBtn.addEventListener('click', () => {
-      likeBtn.classList.toggle('element__like-btn_active');
-    });
-
-    deleteBtn.addEventListener('click', () => {
-      deleteCard(cardElement);
-    });
-
-    return card;
+    const card = new Card(name, link, '#card-template');
+    const cardElement = card.create();
+    return cardElement;
   }
 
   function deleteCard(card) {
@@ -89,28 +74,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleAddFormSubmit(evt) {
     evt.preventDefault();
-
-    const name = placeInput.value;
-    const link = urlInput.value;
-
-    const newCard = createCard(name, link);
-    elementsContainer.insertBefore(newCard, elementsContainer.firstChild);
-
-    evt.target.reset();
-
-    closePopup(addPopup);
-    if (currentPopup !== null) {
-      closePopup(currentPopup);
+  
+    const form = evt.currentTarget;
+    const nameInput = form.querySelector('.popup__input_type_place');
+    const linkInput = form.querySelector('.popup__input_type_url');
+  
+    if (nameInput && linkInput && nameInput.value && linkInput.value) {
+      const name = nameInput.value;
+      const link = linkInput.value;
+  
+      const newCard = createCard(name, link); // Изменил эту строку
+      elementsContainer.appendChild(newCard); // Изменил эту строку
+  
+      form.reset();
+      closePopup(addPopup);
+      if (currentPopup !== null) {
+        closePopup(currentPopup);
+      }
+  
+      profileAddButton.disabled = true;
+      formValidatorAdd.resetValidation();
     }
-
-    profileAddButton.classList.add('popup__btn-add_disabled');
-    profileAddButton.setAttribute('disabled', 'disabled');
   }
+  
+  
+
+  profileAddButton.addEventListener('click', handleAddFormSubmit);
 
   profileEditButton.addEventListener('click', () => {
     openPopup(profilePopup);
     userNameInput.value = profileName.textContent;
     userAboutInput.value = profileAbout.textContent;
+    formValidatorEdit.resetValidation();
   });
 
   profileAddButton.addEventListener('click', () => {
@@ -134,8 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   popupForm.addEventListener('submit', handleProfileFormSubmit);
 
-  const elementsContainer = document.querySelector('.elements');
-
   elementsContainer.addEventListener('click', (event) => {
     if (event.target.classList.contains('element__image')) {
       const cardImage = event.target;
@@ -150,7 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  const initialCards = [{
+  const initialCards = [
+    {
       name: 'Архыз',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
     },
@@ -181,17 +175,24 @@ document.addEventListener('DOMContentLoaded', () => {
     elementsContainer.appendChild(card);
   });
 
-  const formValidatorSettings = {
-    formSelector: '.popup__form',
+  const formValidatorSettingsEdit = {
+    formSelector: '.popup-edit .popup__form',
     inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__btn-save',
-    inactiveButtonClass: 'popup__btn-add_disabled',
+    submitButtonSelector: '.popup-edit .popup__btn-save',
     inputErrorClass: 'popup__input_type_error',
   };
 
-  const popupForms = Array.from(document.querySelectorAll('.popup__form'));
-  popupForms.forEach((form) => {
-    const formValidator = new FormValidator(formValidatorSettings, form);
-    formValidator.enableValidation();
-  });
+  const formValidatorSettingsAdd = {
+    formSelector: '.popup-add .popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup-add .popup__btn-add',
+    inputErrorClass: 'popup__input_type_error',
+  };
+
+  // Создайте два отдельных экземпляра FormValidator для каждой формы
+  const formValidatorEdit = new FormValidator(formValidatorSettingsEdit, popupForm);
+  formValidatorEdit.enableValidation();
+
+  const formValidatorAdd = new FormValidator(formValidatorSettingsAdd, addPopup.querySelector('.popup__form'));
+  formValidatorAdd.enableValidation();
 });

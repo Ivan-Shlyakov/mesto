@@ -39,7 +39,6 @@ export class Card {
         popupImageElement.setAttribute('src', this._link);
         popupImageElement.setAttribute('alt', this._name);
         popupCaptionElement.textContent = this._name;
-        openPopup('.popup-image'); // <-- Added dot to the class name to make it valid
     }
 
     create() {
@@ -56,7 +55,3 @@ export class Card {
         return cardElement;
     }
 }
-
-export {
-    Card
-};
