@@ -75,18 +75,20 @@ document.addEventListener('DOMContentLoaded', () => {
   function handleAddFormSubmit(evt) {
     evt.preventDefault();
   
-    const form = evt.currentTarget;
+    const form = evt.currentTarget; 
     const nameInput = form.querySelector('.popup__input_type_place');
     const linkInput = form.querySelector('.popup__input_type_url');
   
+    
     if (nameInput && linkInput && nameInput.value && linkInput.value) {
       const name = nameInput.value;
       const link = linkInput.value;
   
-      const newCard = createCard(name, link); 
-      elementsContainer.appendChild(newCard); 
+      const newCard = createCard(name, link);
+      elementsContainer.insertBefore(newCard, elementsContainer.firstChild);
   
-      form.reset();
+      form.reset(); 
+  
       closePopup(addPopup);
       if (currentPopup !== null) {
         closePopup(currentPopup);
@@ -96,6 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
       formValidatorAdd.resetValidation();
     }
   }
+  
+  const popupAddForm = addPopup.querySelector('.popup__form'); 
+  popupAddForm.addEventListener('submit', handleAddFormSubmit);
   
   
 
